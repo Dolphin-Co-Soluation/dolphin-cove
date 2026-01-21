@@ -1,0 +1,362 @@
+.network-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: 24px;
+}
+
+/* Header */
+.network-header {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 24px 32px;
+}
+
+.header-left h1 {
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.header-left p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.header-search {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  min-width: 280px;
+}
+
+.header-search input {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 14px;
+}
+
+.header-search input::placeholder {
+  color: var(--text-muted);
+}
+
+.header-search svg {
+  color: var(--text-muted);
+}
+
+/* Tabs */
+.network-tabs {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 8px;
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  padding: 8px;
+}
+
+.network-tabs .tab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.network-tabs .tab:hover {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.network-tabs .tab.active {
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(45, 212, 191, 0.2));
+  color: var(--accent-cyan);
+}
+
+.tab-count {
+  background: rgba(56, 189, 248, 0.2);
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--accent-cyan);
+}
+
+/* Content */
+.network-content {
+  min-height: 400px;
+}
+
+.connections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+/* Connection Card */
+.connection-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.2s;
+}
+
+.connection-card:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+}
+
+.card-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 32px;
+  color: white;
+  overflow: hidden;
+}
+
+.card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-info h3 {
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.card-info p {
+  color: var(--text-muted);
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.user-title {
+  color: var(--text-secondary);
+  font-size: 14px;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.user-skills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.user-skills span {
+  padding: 4px 10px;
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--accent-cyan);
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.card-actions .btn-secondary {
+  flex: 1;
+}
+
+.btn-icon {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-icon:hover {
+  border-color: #ef4444;
+  color: #ef4444;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 80px 40px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  grid-column: 1 / -1;
+}
+
+.empty-state svg {
+  color: var(--text-muted);
+  opacity: 0.5;
+  margin-bottom: 24px;
+}
+
+.empty-state h2 {
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.empty-hint {
+  font-size: 14px;
+  color: var(--accent-cyan);
+  margin-top: 16px;
+}
+
+.empty-state .btn-primary {
+  margin-top: 24px;
+}
+
+/* Sidebar */
+.network-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.stats-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 24px;
+}
+
+.stats-card h3 {
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  font-size: 16px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-row span {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+.stat-row strong {
+  color: var(--accent-cyan);
+  font-size: 18px;
+}
+
+.tips-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  padding: 24px;
+}
+
+.tips-card h4 {
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.tips-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tips-card li {
+  color: var(--text-secondary);
+  font-size: 14px;
+  padding: 8px 0;
+  padding-left: 20px;
+  position: relative;
+}
+
+.tips-card li::before {
+  content: '🐬';
+  position: absolute;
+  left: 0;
+  font-size: 12px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .network-page {
+    grid-template-columns: 1fr;
+  }
+
+  .network-header {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+
+  .header-search {
+    width: 100%;
+    min-width: auto;
+  }
+
+  .network-tabs {
+    flex-wrap: wrap;
+  }
+
+  .network-tabs .tab {
+    flex: 1 0 calc(33% - 8px);
+    min-width: 100px;
+  }
+
+  .network-sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .stats-card,
+  .tips-card {
+    flex: 1;
+    min-width: 250px;
+  }
+}

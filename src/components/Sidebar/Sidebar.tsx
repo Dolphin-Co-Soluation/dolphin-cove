@@ -7,7 +7,11 @@ import {
   Bookmark,
   Code,
   Waves,
-  Star
+  Star,
+  Settings,
+  User as UserIcon,
+  MessageSquare,
+  Bell
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import './Sidebar.css';
@@ -32,8 +36,8 @@ export function Sidebar() {
               <span>{user?.displayName?.charAt(0) || 'U'}</span>
             )}
           </div>
-          <h3>{user?.displayName}</h3>
-          <p>@{user?.username}</p>
+          <h3>{user?.displayName || 'New User'}</h3>
+          <p>@{user?.username || 'username'}</p>
           {user?.isFreelancer && (
             <span className="freelancer-badge">
               <Code size={12} />
@@ -43,15 +47,15 @@ export function Sidebar() {
         </div>
         <div className="profile-stats">
           <div className="stat">
-            <strong>124</strong>
+            <strong>{user?.connections?.length || 0}</strong>
             <span>Connections</span>
           </div>
           <div className="stat">
-            <strong>48</strong>
+            <strong>{user?.projects?.length || 0}</strong>
             <span>Projects</span>
           </div>
           <div className="stat">
-            <strong>4.9</strong>
+            <strong>{user?.rating || '-'}</strong>
             <span>Rating</span>
           </div>
         </div>
@@ -63,14 +67,25 @@ export function Sidebar() {
           <Home size={20} />
           <span>Home Feed</span>
         </NavLink>
+        <NavLink to="/profile" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <UserIcon size={20} />
+          <span>My Profile</span>
+        </NavLink>
         <NavLink to="/jobs" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <Briefcase size={20} />
           <span>Freelance Jobs</span>
-          <span className="nav-badge">12</span>
         </NavLink>
         <NavLink to="/network" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <Users size={20} />
           <span>My Network</span>
+        </NavLink>
+        <NavLink to="/messages" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <MessageSquare size={20} />
+          <span>Messages</span>
+        </NavLink>
+        <NavLink to="/notifications" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <Bell size={20} />
+          <span>Notifications</span>
         </NavLink>
         <NavLink to="/trending" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <TrendingUp size={20} />
@@ -80,52 +95,39 @@ export function Sidebar() {
           <Bookmark size={20} />
           <span>Saved Posts</span>
         </NavLink>
+        <NavLink to="/settings" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <Settings size={20} />
+          <span>Settings</span>
+        </NavLink>
       </nav>
 
-      {/* Trending Skills */}
+      {/* Your Skills */}
       <div className="sidebar-section">
         <h4>
           <Waves size={16} />
-          Trending Skills
+          Your Skills
         </h4>
         <div className="trending-skills">
-          <span className="skill-tag">React</span>
-          <span className="skill-tag">TypeScript</span>
-          <span className="skill-tag">Node.js</span>
-          <span className="skill-tag">Python</span>
-          <span className="skill-tag">AWS</span>
-          <span className="skill-tag">Rust</span>
+          {user?.skills && user.skills.length > 0 ? (
+            user.skills.map((skill, index) => (
+              <span key={index} className="skill-tag">{skill}</span>
+            ))
+          ) : (
+            <p className="empty-state-text">Add skills in your profile</p>
+          )}
         </div>
       </div>
 
-      {/* Top Freelancers */}
+      {/* Quick Links */}
       <div className="sidebar-section">
         <h4>
           <Star size={16} />
-          Rising Developers
+          Quick Links
         </h4>
-        <div className="top-freelancers">
-          <div className="freelancer-item">
-            <div className="avatar-tiny">C</div>
-            <div className="freelancer-info">
-              <span className="name">Coral Coder</span>
-              <span className="specialty">Backend Dev</span>
-            </div>
-          </div>
-          <div className="freelancer-item">
-            <div className="avatar-tiny">W</div>
-            <div className="freelancer-info">
-              <span className="name">Wave Maker</span>
-              <span className="specialty">UI/UX Designer</span>
-            </div>
-          </div>
-          <div className="freelancer-item">
-            <div className="avatar-tiny">D</div>
-            <div className="freelancer-info">
-              <span className="name">Deep Diver</span>
-              <span className="specialty">DevOps Engineer</span>
-            </div>
-          </div>
+        <div className="quick-links">
+          <NavLink to="/profile" className="quick-link">View Profile</NavLink>
+          <NavLink to="/settings" className="quick-link">Settings</NavLink>
+          <NavLink to="/jobs" className="quick-link">Browse Jobs</NavLink>
         </div>
       </div>
 

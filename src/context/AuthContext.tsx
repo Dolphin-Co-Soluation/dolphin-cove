@@ -5,6 +5,7 @@ interface AuthContextType extends AuthState {
   login: (email: string, password: string) => Promise<boolean>;
   register: (userData: RegisterData) => Promise<boolean>;
   logout: () => void;
+  updateUser: (userData: Partial<User>) => void;
 }
 
 interface RegisterData {
@@ -17,21 +18,6 @@ interface RegisterData {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Mock user for demo
-const mockUser: User = {
-  id: '1',
-  username: 'oceandev',
-  email: 'ocean@dolphincove.dev',
-  displayName: 'Ocean Developer',
-  avatar: undefined,
-  bio: '🌊 Full-stack developer riding the waves of code. React, Node.js, and TypeScript enthusiast.',
-  skills: ['React', 'TypeScript', 'Node.js', 'Python', 'AWS'],
-  joinedAt: new Date('2024-01-15'),
-  isFreelancer: true,
-  hourlyRate: 75,
-  portfolio: 'https://oceandev.io'
-};
-
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [authState, setAuthState] = useState<AuthState>({
     isAuthenticated: false,
@@ -39,31 +25,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     loading: false,
   });
 
-  const login = async (email: string, _password: string): Promise<boolean> => {
+  // TODO: Replace with actual API call to backend
+  const login = async (_email: string, _password: string): Promise<boolean> => {
     setAuthState(prev => ({ ...prev, loading: true }));
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    
-    if (email) {
-      setAuthState({
-        isAuthenticated: true,
-        user: mockUser,
-        loading: false,
-      });
-      return true;
-    }
+    // Placeholder for backend API integration
+    // const response = await fetch('/api/auth/login', { ... });
     
     setAuthState(prev => ({ ...prev, loading: false }));
-    return false;
+    return false; // Will return true when backend is connected
   };
 
+  // TODO: Replace with actual API call to backend
   const register = async (userData: RegisterData): Promise<boolean> => {
     setAuthState(prev => ({ ...prev, loading: true }));
     
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Placeholder for backend API integration
+    // const response = await fetch('/api/auth/register', { ... });
     
+    // Temporary: Create user locally (remove when backend is ready)
     const newUser: User = {
       id: Date.now().toString(),
       username: userData.username,
@@ -84,6 +64,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const logout = () => {
+    // TODO: Call backend logout endpoint
+    // await fetch('/api/auth/logout', { ... });
+    
     setAuthState({
       isAuthenticated: false,
       user: null,
@@ -91,8 +74,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const updateUser = (userData: Partial<User>) => {
+    setAuthState(prev => ({
+      ...prev,
+      user: prev.user ? { ...prev.user, ...userData } : null,
+    }));
+  };
+
   return (
-    <AuthContext.Provider value={{ ...authState, login, register, logout }}>
+    <AuthContext.Provider value={{ ...authState, login, register, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );

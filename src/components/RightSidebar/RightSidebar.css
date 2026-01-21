@@ -251,6 +251,28 @@
   font-size: 0.7rem;
 }
 
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.empty-state .empty-icon {
+  color: #475569;
+  opacity: 0.6;
+  margin-bottom: 12px;
+}
+
+.empty-state p {
+  color: #64748b;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
 /* Footer */
 .sidebar-footer {
   margin-top: auto;
