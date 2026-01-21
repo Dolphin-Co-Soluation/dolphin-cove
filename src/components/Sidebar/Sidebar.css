@@ -1,0 +1,309 @@
+.sidebar {
+  position: fixed;
+  top: 64px;
+  left: 0;
+  width: 280px;
+  height: calc(100vh - 64px);
+  background: linear-gradient(180deg, #0f172a 0%, #0a1628 100%);
+  border-right: 1px solid rgba(56, 189, 248, 0.1);
+  overflow-y: auto;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 3px;
+}
+
+/* Profile Card */
+.sidebar-profile {
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(56, 189, 248, 0.1);
+  overflow: hidden;
+}
+
+.profile-cover {
+  height: 60px;
+  background: linear-gradient(135deg, #0891b2 0%, #0e7490 50%, #155e75 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.cover-waves {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.92,146.53,111.31,214.34,92.83,## 282.15,74.35,321.39,56.44,321.39,56.44Z' fill='%230f172a'/%3E%3C/svg%3E") no-repeat;
+  background-size: cover;
+}
+
+.profile-info {
+  padding: 0 1rem 1rem;
+  text-align: center;
+  margin-top: -30px;
+  position: relative;
+}
+
+.avatar-medium {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin: 0 auto 0.75rem;
+  border: 3px solid #0f172a;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+}
+
+.avatar-medium img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.profile-info h3 {
+  color: #f1f5f9;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.profile-info p {
+  color: #64748b;
+  font-size: 0.8rem;
+  margin: 0 0 0.5rem;
+}
+
+.freelancer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.25rem 0.75rem;
+  background: linear-gradient(135deg, rgba(34, 211, 238, 0.2) 0%, rgba(45, 212, 191, 0.2) 100%);
+  border: 1px solid rgba(34, 211, 238, 0.3);
+  border-radius: 9999px;
+  color: #22d3ee;
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+.profile-stats {
+  display: flex;
+  border-top: 1px solid rgba(56, 189, 248, 0.1);
+  padding: 0.75rem 0;
+}
+
+.stat {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.stat strong {
+  color: #f1f5f9;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.stat span {
+  color: #64748b;
+  font-size: 0.7rem;
+}
+
+.stat:not(:last-child) {
+  border-right: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+/* Navigation */
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  background: rgba(56, 189, 248, 0.1);
+  color: #38bdf8;
+}
+
+.nav-link.active {
+  background: linear-gradient(135deg, rgba(8, 145, 178, 0.3) 0%, rgba(6, 182, 212, 0.2) 100%);
+  color: #22d3ee;
+  border: 1px solid rgba(34, 211, 238, 0.2);
+}
+
+.nav-link.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 60%;
+  background: linear-gradient(180deg, #22d3ee 0%, #2dd4bf 100%);
+  border-radius: 0 3px 3px 0;
+}
+
+.nav-badge {
+  margin-left: auto;
+  padding: 0.125rem 0.5rem;
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  border-radius: 9999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: white;
+}
+
+/* Sections */
+.sidebar-section {
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.sidebar-section h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #e2e8f0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.sidebar-section h4 svg {
+  color: #38bdf8;
+}
+
+/* Trending Skills */
+.trending-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.skill-tag {
+  padding: 0.25rem 0.75rem;
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.2);
+  border-radius: 9999px;
+  color: #7dd3fc;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.skill-tag:hover {
+  background: rgba(56, 189, 248, 0.2);
+  border-color: #38bdf8;
+  transform: translateY(-1px);
+}
+
+/* Top Freelancers */
+.top-freelancers {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.freelancer-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.freelancer-item:hover {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.avatar-tiny {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+
+.freelancer-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.freelancer-info .name {
+  color: #e2e8f0;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.freelancer-info .specialty {
+  color: #64748b;
+  font-size: 0.7rem;
+}
+
+/* Footer */
+.sidebar-footer {
+  margin-top: auto;
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.sidebar-footer p {
+  color: #475569;
+  font-size: 0.7rem;
+  margin: 0.25rem 0;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}
