@@ -1,0 +1,377 @@
+.manage-applicants-page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.manage-header {
+  margin-bottom: 2rem;
+}
+
+.manage-header h1 {
+  font-size: 1.75rem;
+  color: var(--text-primary);
+  margin: 0.5rem 0;
+}
+
+.manage-header p {
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Job Summary */
+.job-summary-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.job-summary-info h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+}
+
+.job-summary-info .meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.job-summary-info .meta span {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.job-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.close-job-btn {
+  padding: 0.75rem 1.5rem;
+  background: #fee2e2;
+  color: #991b1b;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.close-job-btn:hover {
+  background: #fecaca;
+}
+
+.edit-job-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--hover-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-job-btn:hover {
+  background: var(--border-color);
+}
+
+/* Applicants Section */
+.applicants-section h2 {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.applicants-count {
+  font-size: 0.9rem;
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.applicants-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.applicant-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s;
+}
+
+.applicant-card:hover {
+  border-color: var(--primary-color);
+}
+
+.applicant-card.hired {
+  border-color: #16a34a;
+  background: #f0fdf4;
+}
+
+.applicant-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.applicant-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.applicant-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.applicant-details h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.applicant-details .applied-date {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.hired-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: #16a34a;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.applicant-proposal {
+  margin-bottom: 1rem;
+}
+
+.proposal-stats {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
+  background: var(--hover-bg);
+  border-radius: 8px;
+}
+
+.proposal-stat {
+  display: flex;
+  flex-direction: column;
+}
+
+.proposal-stat .label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.proposal-stat .value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.proposal-stat .value.budget {
+  color: var(--success-color);
+}
+
+.cover-letter {
+  background: var(--hover-bg);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 3px solid var(--primary-color);
+}
+
+.cover-letter h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.cover-letter p {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.applicant-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.hire-btn {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.hire-btn:hover:not(:disabled) {
+  background: var(--primary-hover);
+}
+
+.hire-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.view-profile-btn {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.view-profile-btn:hover {
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Empty State */
+.no-applicants {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.no-applicants .icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.no-applicants h3 {
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.no-applicants p {
+  color: var(--text-secondary);
+}
+
+/* Confirmation Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--card-bg);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal-content h2 {
+  margin: 0 0 1rem;
+  color: var(--text-primary);
+}
+
+.modal-content p {
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modal-cancel-btn {
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.modal-confirm-btn {
+  padding: 0.75rem 1.5rem;
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .job-summary-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .job-actions {
+    width: 100%;
+  }
+
+  .job-actions button {
+    flex: 1;
+  }
+
+  .applicant-actions {
+    flex-direction: column;
+  }
+}

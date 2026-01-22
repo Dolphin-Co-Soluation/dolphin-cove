@@ -10,11 +10,13 @@ import {
 } from 'lucide-react';
 import { usePosts } from '../../context/PostContext';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import './CreatePost.css';
 
 export function CreatePost() {
   const { addPost } = usePosts();
   const { user, isAuthenticated } = useAuth();
+  const { showSuccess, showError } = useToast();
   const [content, setContent] = useState('');
   const [isFreelance, setIsFreelance] = useState(false);
   const [showFreelanceForm, setShowFreelanceForm] = useState(false);
@@ -31,7 +33,15 @@ export function CreatePost() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!content.trim()) return;
+    if (!content.trim()) {
+      showError('Please write something before posting');
+      return;
+    }
+
+    if (isFreelance && !freelanceDetails.title.trim()) {
+      showError('Please add a title for your freelance post');
+      return;
+    }
 
     addPost({
       author: user,
@@ -57,6 +67,8 @@ export function CreatePost() {
       skills: '',
       projectType: 'fixed',
     });
+
+    showSuccess(isFreelance ? 'Freelance post created!' : 'Post shared successfully!');
   };
 
   return (

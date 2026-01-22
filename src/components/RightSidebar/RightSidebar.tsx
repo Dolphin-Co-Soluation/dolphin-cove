@@ -1,11 +1,27 @@
-import { Briefcase, MapPin, ExternalLink, Zap, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Briefcase, Zap, TrendingUp, ExternalLink, Inbox } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import './RightSidebar.css';
+
+// Empty state component
+function EmptyState({ icon: Icon, message }: { icon: React.ElementType; message: string }) {
+  return (
+    <div className="empty-state">
+      <Icon size={24} className="empty-icon" />
+      <p>{message}</p>
+    </div>
+  );
+}
 
 export function RightSidebar() {
   const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) return null;
+
+  // TODO: Replace with real data from backend
+  const jobs: unknown[] = [];
+  const suggestedUsers: unknown[] = [];
+  const trendingTopics: unknown[] = [];
 
   return (
     <aside className="right-sidebar">
@@ -14,51 +30,21 @@ export function RightSidebar() {
         <div className="card-header">
           <Briefcase size={18} />
           <h3>Hot Opportunities</h3>
-          <span className="badge">New</span>
         </div>
         
         <div className="job-list">
-          <div className="job-item">
-            <div className="job-logo">🐬</div>
-            <div className="job-info">
-              <h4>Full Stack Developer</h4>
-              <p className="company">OceanTech Inc.</p>
-              <div className="job-meta">
-                <span><MapPin size={12} /> Remote</span>
-                <span>$80-120k</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="job-item">
-            <div className="job-logo">🌊</div>
-            <div className="job-info">
-              <h4>React Native Expert</h4>
-              <p className="company">WaveApp Studio</p>
-              <div className="job-meta">
-                <span><MapPin size={12} /> Hybrid</span>
-                <span>$70-90k</span>
-              </div>
-            </div>
-          </div>
-          
-          <div className="job-item">
-            <div className="job-logo">🐚</div>
-            <div className="job-info">
-              <h4>DevOps Engineer</h4>
-              <p className="company">ShellCloud Systems</p>
-              <div className="job-meta">
-                <span><MapPin size={12} /> Remote</span>
-                <span>$100-140k</span>
-              </div>
-            </div>
-          </div>
+          {jobs.length > 0 ? (
+            // TODO: Map over real jobs when backend is ready
+            <></>
+          ) : (
+            <EmptyState icon={Inbox} message="No jobs available yet" />
+          )}
         </div>
         
-        <a href="/jobs" className="see-all-link">
-          View all jobs
+        <Link to="/jobs" className="see-all-link">
+          Browse all jobs
           <ExternalLink size={14} />
-        </a>
+        </Link>
       </div>
 
       {/* Who to Follow */}
@@ -69,33 +55,18 @@ export function RightSidebar() {
         </div>
         
         <div className="follow-list">
-          <div className="follow-item">
-            <div className="follow-avatar">S</div>
-            <div className="follow-info">
-              <h4>Seafoam Dev</h4>
-              <p>AI/ML Engineer</p>
-            </div>
-            <button className="follow-btn">Follow</button>
-          </div>
-          
-          <div className="follow-item">
-            <div className="follow-avatar">T</div>
-            <div className="follow-info">
-              <h4>Tidal Coder</h4>
-              <p>Blockchain Dev</p>
-            </div>
-            <button className="follow-btn">Follow</button>
-          </div>
-          
-          <div className="follow-item">
-            <div className="follow-avatar">A</div>
-            <div className="follow-info">
-              <h4>Aqua Scripts</h4>
-              <p>Frontend Wizard</p>
-            </div>
-            <button className="follow-btn">Follow</button>
-          </div>
+          {suggestedUsers.length > 0 ? (
+            // TODO: Map over real users when backend is ready
+            <></>
+          ) : (
+            <EmptyState icon={Inbox} message="No suggestions yet" />
+          )}
         </div>
+        
+        <Link to="/network" className="see-all-link">
+          Explore network
+          <ExternalLink size={14} />
+        </Link>
       </div>
 
       {/* Trending Topics */}
@@ -106,47 +77,27 @@ export function RightSidebar() {
         </div>
         
         <div className="trending-list">
-          <div className="trending-item">
-            <span className="trend-rank">1</span>
-            <div className="trend-info">
-              <h4>#ReactServer</h4>
-              <p>2.4k posts today</p>
-            </div>
-          </div>
-          
-          <div className="trending-item">
-            <span className="trend-rank">2</span>
-            <div className="trend-info">
-              <h4>#AIAssistants</h4>
-              <p>1.8k posts today</p>
-            </div>
-          </div>
-          
-          <div className="trending-item">
-            <span className="trend-rank">3</span>
-            <div className="trend-info">
-              <h4>#RustLang</h4>
-              <p>1.2k posts today</p>
-            </div>
-          </div>
-          
-          <div className="trending-item">
-            <span className="trend-rank">4</span>
-            <div className="trend-info">
-              <h4>#RemoteWork</h4>
-              <p>980 posts today</p>
-            </div>
-          </div>
+          {trendingTopics.length > 0 ? (
+            // TODO: Map over real trending data when backend is ready
+            <></>
+          ) : (
+            <EmptyState icon={Inbox} message="No trending topics yet" />
+          )}
         </div>
+        
+        <Link to="/trending" className="see-all-link">
+          See what's trending
+          <ExternalLink size={14} />
+        </Link>
       </div>
 
       {/* Footer Links */}
       <div className="sidebar-footer">
         <div className="footer-links">
-          <a href="/about">About</a>
-          <a href="/help">Help</a>
-          <a href="/privacy">Privacy</a>
-          <a href="/terms">Terms</a>
+          <Link to="/about">About</Link>
+          <Link to="/help">Help</Link>
+          <Link to="/privacy">Privacy</Link>
+          <Link to="/terms">Terms</Link>
         </div>
         <p className="copyright">© 2026 Dolphin Cove</p>
       </div>
