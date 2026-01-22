@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, User, Code, Waves } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import logo from '../../assets/Dolphin-cove.png';
 import './Auth.css';
 
@@ -17,6 +18,7 @@ export function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const { register, loading } = useAuth();
+  const { showSuccess, showError } = useToast();
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,16 +35,19 @@ export function RegisterPage() {
 
     if (!formData.displayName || !formData.username || !formData.email || !formData.password) {
       setError('Please fill in all fields');
+      showError('Please fill in all required fields');
       return;
     }
 
     if (formData.password !== formData.confirmPassword) {
       setError('Passwords do not match');
+      showError('Passwords do not match');
       return;
     }
 
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters');
+      showError('Password must be at least 6 characters');
       return;
     }
 
@@ -55,9 +60,11 @@ export function RegisterPage() {
     });
 
     if (success) {
-      navigate('/');
+      showSuccess('Account created successfully! Welcome aboard 🐬');
+      navigate('/home');
     } else {
       setError('Registration failed. Please try again.');
+      showError('Registration failed. Please try again.');
     }
   };
 

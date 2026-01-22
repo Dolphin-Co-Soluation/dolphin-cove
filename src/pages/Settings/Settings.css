@@ -245,11 +245,11 @@
   font-size: 14px;
 }
 
-/* Toggle Switch */
+/* Toggle Switch - Green when ON, Red when OFF */
 .toggle {
   position: relative;
   display: inline-block;
-  width: 50px;
+  width: 52px;
   height: 28px;
 }
 
@@ -266,7 +266,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: var(--border-color);
+  background: var(--error-color);
   border-radius: 28px;
   transition: 0.3s;
 }
@@ -284,17 +284,17 @@
 }
 
 .toggle input:checked + .toggle-slider {
-  background: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal));
+  background: var(--success-color);
 }
 
 .toggle input:checked + .toggle-slider::before {
-  transform: translateX(22px);
+  transform: translateX(24px);
 }
 
 /* Theme Options */
 .theme-options {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 16px;
   margin-bottom: 24px;
 }
@@ -311,6 +311,7 @@
   color: var(--text-secondary);
   cursor: pointer;
   transition: all 0.2s;
+  position: relative;
 }
 
 .theme-option:hover {
@@ -319,9 +320,16 @@
 }
 
 .theme-option.active {
-  border-color: var(--accent-cyan);
-  background: rgba(56, 189, 248, 0.1);
-  color: var(--accent-cyan);
+  border-color: var(--success-color);
+  background: var(--success-bg);
+  color: var(--success-color);
+}
+
+.theme-check {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  color: var(--success-color);
 }
 
 .theme-note {

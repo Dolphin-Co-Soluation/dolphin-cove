@@ -17,9 +17,11 @@ import {
   Smartphone,
   Moon,
   Sun,
-  Monitor
+  CheckCircle
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
+import { useToast } from '../../context/ToastContext';
 import { useNavigate } from 'react-router-dom';
 import './Settings.css';
 
@@ -27,10 +29,11 @@ type SettingsTab = 'account' | 'privacy' | 'notifications' | 'appearance' | 'sec
 
 export function Settings() {
   const { user, logout, updateUser } = useAuth();
+  const { theme, setTheme } = useTheme();
+  const { showSuccess, showError } = useToast();
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<SettingsTab>('account');
   const [showPassword, setShowPassword] = useState(false);
-  const [theme, setTheme] = useState<'dark' | 'light' | 'system'>('dark');
   
   // Form states
   const [formData, setFormData] = useState({
@@ -63,10 +66,16 @@ export function Settings() {
 
   const handleLogout = () => {
     logout();
+    showSuccess('You have been logged out');
     navigate('/');
   };
 
   const handleSaveAccount = () => {
+    if (!formData.displayName.trim()) {
+      showError('Display name is required');
+      return;
+    }
+    
     // TODO: Save to backend
     updateUser({
       displayName: formData.displayName,
@@ -76,7 +85,12 @@ export function Settings() {
       website: formData.website,
       hourlyRate: formData.hourlyRate ? Number(formData.hourlyRate) : undefined,
     });
-    alert('Profile updated! (Changes will persist when backend is connected)');
+    showSuccess('Profile updated successfully!');
+  };
+
+  const handleThemeChange = (newTheme: 'light' | 'dark') => {
+    setTheme(newTheme);
+    showSuccess(`Theme changed to ${newTheme} mode`);
   };
 
   const tabs = [
@@ -377,29 +391,24 @@ export function Settings() {
               <div className="theme-options">
                 <button
                   className={`theme-option ${theme === 'dark' ? 'active' : ''}`}
-                  onClick={() => setTheme('dark')}
+                  onClick={() => handleThemeChange('dark')}
                 >
                   <Moon size={24} />
                   <span>Dark</span>
+                  {theme === 'dark' && <CheckCircle size={16} className="theme-check" />}
                 </button>
                 <button
                   className={`theme-option ${theme === 'light' ? 'active' : ''}`}
-                  onClick={() => setTheme('light')}
+                  onClick={() => handleThemeChange('light')}
                 >
                   <Sun size={24} />
                   <span>Light</span>
-                </button>
-                <button
-                  className={`theme-option ${theme === 'system' ? 'active' : ''}`}
-                  onClick={() => setTheme('system')}
-                >
-                  <Monitor size={24} />
-                  <span>System</span>
+                  {theme === 'light' && <CheckCircle size={16} className="theme-check" />}
                 </button>
               </div>
 
               <p className="theme-note">
-                Note: Light theme coming soon! Currently only dark theme is available.
+                Your preference will be saved and applied across all sessions.
               </p>
             </div>
           )}

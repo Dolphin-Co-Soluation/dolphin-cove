@@ -1,7 +1,7 @@
 .home-page {
   min-height: calc(100vh - 64px);
   padding-top: 64px;
-  background: linear-gradient(180deg, #0a1628 0%, #0f172a 50%, #0a1628 100%);
+  background: var(--bg-primary);
 }
 
 .home-page.authenticated {

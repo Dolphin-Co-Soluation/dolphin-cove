@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, Waves } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useToast } from '../../context/ToastContext';
 import logo from '../../assets/Dolphin-cove.png';
 import './Auth.css';
 
@@ -11,6 +12,7 @@ export function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const { login, loading } = useAuth();
+  const { showSuccess, showError } = useToast();
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -19,14 +21,17 @@ export function LoginPage() {
 
     if (!email || !password) {
       setError('Please fill in all fields');
+      showError('Please fill in all fields');
       return;
     }
 
     const success = await login(email, password);
     if (success) {
-      navigate('/');
+      showSuccess('Welcome back! Login successful');
+      navigate('/home');
     } else {
       setError('Invalid credentials');
+      showError('Invalid email or password');
     }
   };
 
