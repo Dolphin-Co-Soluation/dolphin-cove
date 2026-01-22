@@ -5,7 +5,7 @@ import {
   Bell, 
   Palette, 
   Shield, 
-  CreditCard,
+  Briefcase,
   HelpCircle,
   LogOut,
   ChevronRight,
@@ -17,7 +17,8 @@ import {
   Smartphone,
   Moon,
   Sun,
-  CheckCircle
+  CheckCircle,
+  DollarSign
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
@@ -25,7 +26,7 @@ import { useToast } from '../../context/ToastContext';
 import { useNavigate } from 'react-router-dom';
 import './Settings.css';
 
-type SettingsTab = 'account' | 'privacy' | 'notifications' | 'appearance' | 'security' | 'billing' | 'help';
+type SettingsTab = 'account' | 'privacy' | 'notifications' | 'appearance' | 'security' | 'freelancer' | 'help';
 
 export function Settings() {
   const { user, logout, updateUser } = useAuth();
@@ -99,7 +100,7 @@ export function Settings() {
     { id: 'notifications' as SettingsTab, label: 'Notifications', icon: Bell },
     { id: 'appearance' as SettingsTab, label: 'Appearance', icon: Palette },
     { id: 'security' as SettingsTab, label: 'Security', icon: Lock },
-    { id: 'billing' as SettingsTab, label: 'Billing', icon: CreditCard },
+    { id: 'freelancer' as SettingsTab, label: 'Freelancer', icon: Briefcase },
     { id: 'help' as SettingsTab, label: 'Help & Support', icon: HelpCircle },
   ];
 
@@ -266,7 +267,7 @@ export function Settings() {
 
               <div className="setting-item">
                 <div className="setting-info">
-                  <CreditCard size={20} />
+                  <DollarSign size={20} />
                   <div>
                     <h4>Show Hourly Rate</h4>
                     <p>Display your rate on your profile</p>
@@ -465,26 +466,108 @@ export function Settings() {
             </div>
           )}
 
-          {/* Billing Settings */}
-          {activeTab === 'billing' && (
+          {/* Freelancer Settings */}
+          {activeTab === 'freelancer' && (
             <div className="settings-section">
-              <h3>Billing & Subscription</h3>
-              <p className="section-description">Manage your subscription and payment methods</p>
+              <h3>Freelancer Mode</h3>
+              <p className="section-description">Enable freelancer mode to offer your services and get paid</p>
 
-              <div className="subscription-card">
-                <div className="subscription-info">
-                  <h4>Free Plan</h4>
-                  <p>You're currently on the free plan</p>
+              <div className="freelancer-toggle-card">
+                <div className="toggle-info">
+                  <Briefcase size={24} />
+                  <div>
+                    <h4>Freelancer Mode</h4>
+                    <p>Turn on to show your profile in the freelancer marketplace</p>
+                  </div>
                 </div>
-                <button className="btn-primary">Upgrade to Pro</button>
+                <label className="toggle-switch">
+                  <input
+                    type="checkbox"
+                    checked={user?.isFreelancer || false}
+                    onChange={(e) => {
+                      updateUser({ isFreelancer: e.target.checked });
+                      showSuccess(e.target.checked ? 'Freelancer mode enabled!' : 'Freelancer mode disabled');
+                    }}
+                  />
+                  <span className="toggle-slider"></span>
+                </label>
               </div>
 
-              <div className="billing-empty">
-                <CreditCard size={48} />
-                <h4>No payment methods</h4>
-                <p>Add a payment method to upgrade your plan</p>
-                <button className="btn-secondary">Add Payment Method</button>
-              </div>
+              {user?.isFreelancer && (
+                <>
+                  <div className="form-group">
+                    <label>Professional Title</label>
+                    <input
+                      type="text"
+                      placeholder="e.g., Full Stack Developer, UI/UX Designer"
+                      defaultValue={user?.freelancerProfile?.title || ''}
+                    />
+                    <small>This title will appear on your freelancer profile</small>
+                  </div>
+
+                  <div className="form-row">
+                    <div className="form-group">
+                      <label>Hourly Rate (USD)</label>
+                      <div className="input-with-prefix">
+                        <span><DollarSign size={16} /></span>
+                        <input
+                          type="number"
+                          placeholder="50"
+                          defaultValue={user?.freelancerProfile?.hourlyRate || ''}
+                        />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label>Availability</label>
+                      <select defaultValue={user?.freelancerProfile?.availability || 'available'}>
+                        <option value="available">Available</option>
+                        <option value="busy">Busy</option>
+                        <option value="not_available">Not Available</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <hr className="settings-divider" />
+
+                  <h4 className="subsection-title">
+                    💳 Bank Information
+                    <span className="privacy-note">(Only visible to clients after you're hired)</span>
+                  </h4>
+
+                  <div className="form-group">
+                    <label>Bank Name</label>
+                    <input
+                      type="text"
+                      placeholder="Enter your bank name"
+                      defaultValue={user?.bankInfo?.bankName || ''}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Account Holder Name</label>
+                    <input
+                      type="text"
+                      placeholder="Name on your bank account"
+                      defaultValue={user?.bankInfo?.accountHolderName || ''}
+                    />
+                  </div>
+
+                  <div className="form-group">
+                    <label>Account Number</label>
+                    <input
+                      type="text"
+                      placeholder="Your bank account number"
+                      defaultValue={user?.bankInfo?.accountNumber || ''}
+                    />
+                    <small>🔒 Your bank info is encrypted and only shared with clients after hiring</small>
+                  </div>
+
+                  <button className="btn-primary save-btn">
+                    <Save size={16} />
+                    Save Freelancer Settings
+                  </button>
+                </>
+              )}
             </div>
           )}
 

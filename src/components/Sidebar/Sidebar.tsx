@@ -11,7 +11,8 @@ import {
   Settings,
   User as UserIcon,
   MessageSquare,
-  Bell
+  Bell,
+  ClipboardList
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import './Sidebar.css';
@@ -71,9 +72,13 @@ export function Sidebar() {
           <UserIcon size={20} />
           <span>My Profile</span>
         </NavLink>
-        <NavLink to="/jobs" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+        <NavLink to="/freelance" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <Briefcase size={20} />
           <span>Freelance Jobs</span>
+        </NavLink>
+        <NavLink to="/tasks" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+          <ClipboardList size={20} />
+          <span>My Tasks</span>
         </NavLink>
         <NavLink to="/network" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
           <Users size={20} />
@@ -127,7 +132,8 @@ export function Sidebar() {
         <div className="quick-links">
           <NavLink to="/profile" className="quick-link">View Profile</NavLink>
           <NavLink to="/settings" className="quick-link">Settings</NavLink>
-          <NavLink to="/jobs" className="quick-link">Browse Jobs</NavLink>
+          <NavLink to="/freelance" className="quick-link">Browse Jobs</NavLink>
+          <NavLink to="/tasks" className="quick-link">My Tasks</NavLink>
         </div>
       </div>
 

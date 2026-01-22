@@ -1,4 +1,19 @@
 // User Types
+export interface FreelancerProfile {
+  title: string;
+  hourlyRate?: number;
+  availability: 'available' | 'busy' | 'not_available';
+  completedJobs: number;
+  rating: number;
+  totalReviews: number;
+}
+
+export interface BankInfo {
+  bankName: string;
+  accountNumber: string;
+  accountHolderName: string;
+}
+
 export interface User {
   id: string;
   username: string;
@@ -12,6 +27,8 @@ export interface User {
   skills: string[];
   joinedAt: Date;
   isFreelancer: boolean;
+  freelancerProfile?: FreelancerProfile;
+  bankInfo?: BankInfo;
   hourlyRate?: number;
   portfolio?: string;
   connections?: string[]; // User IDs

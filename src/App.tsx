@@ -13,6 +13,8 @@ import { Messages } from './pages/Messages';
 import { Trending } from './pages/Trending';
 import { Saved } from './pages/Saved';
 import { Notifications } from './pages/Notifications';
+import { Freelance, CreateJob, JobDetail, ManageApplicants } from './pages/Freelance';
+import { Tasks } from './pages/Tasks';
 import './App.css';
 
 // Protected Route wrapper
@@ -49,6 +51,15 @@ function AppContent() {
         <Route path="/trending" element={<ProtectedRoute><Trending /></ProtectedRoute>} />
         <Route path="/saved" element={<ProtectedRoute><Saved /></ProtectedRoute>} />
         <Route path="/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+        
+        {/* Freelance Routes */}
+        <Route path="/freelance" element={<Freelance />} />
+        <Route path="/freelance/create" element={<ProtectedRoute><CreateJob /></ProtectedRoute>} />
+        <Route path="/freelance/jobs/:jobId" element={<JobDetail />} />
+        <Route path="/freelance/jobs/:jobId/manage" element={<ProtectedRoute><ManageApplicants /></ProtectedRoute>} />
+        
+        {/* Tasks Route */}
+        <Route path="/tasks" element={<ProtectedRoute><Tasks /></ProtectedRoute>} />
         
         {/* Fallback - redirect to home */}
         <Route path="*" element={<Navigate to="/" replace />} />
