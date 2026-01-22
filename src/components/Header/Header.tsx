@@ -3,18 +3,22 @@ import {
   Search, 
   Bell, 
   MessageCircle, 
-  Menu,
   LogOut,
   User,
-  Settings
+  Settings,
+  Moon,
+  Sun,
+  Menu
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useTheme } from '../../context/ThemeContext';
 import { useState } from 'react';
 import logo from '../../assets/Dolphin-cove.png';
 import './Header.css';
 
 export function Header() {
   const { isAuthenticated, user, logout } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
@@ -22,7 +26,7 @@ export function Header() {
     <header className="header">
       <div className="header-container">
         {/* Logo */}
-        <Link to="/" className="header-logo">
+        <Link to={isAuthenticated ? "/home" : "/"} className="header-logo">
           <img src={logo} alt="Dolphin Cove" className="logo-image" />
           <span className="logo-text">Dolphin Cove</span>
         </Link>
@@ -43,15 +47,22 @@ export function Header() {
         <nav className={`header-nav ${showMobileMenu ? 'show' : ''}`}>
           {isAuthenticated ? (
             <>
+              {/* Theme Toggle */}
+              <button 
+                className="nav-icon-btn theme-toggle" 
+                title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                onClick={toggleTheme}
+              >
+                {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+              </button>
+
               <Link to="/messages" className="nav-icon-btn" title="Messages">
                 <MessageCircle size={22} />
-                <span className="notification-badge">3</span>
               </Link>
               
-              <button className="nav-icon-btn" title="Notifications">
+              <Link to="/notifications" className="nav-icon-btn" title="Notifications">
                 <Bell size={22} />
-                <span className="notification-badge">5</span>
-              </button>
+              </Link>
 
               <div className="profile-dropdown">
                 <button 
@@ -93,6 +104,13 @@ export function Header() {
             </>
           ) : (
             <div className="auth-buttons">
+              <button 
+                className="nav-icon-btn theme-toggle" 
+                title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+                onClick={toggleTheme}
+              >
+                {theme === 'dark' ? <Sun size={22} /> : <Moon size={22} />}
+              </button>
               <Link to="/login" className="btn btn-ghost">Log In</Link>
               <Link to="/register" className="btn btn-primary">Sign Up</Link>
             </div>

@@ -184,23 +184,22 @@
 .form-group input[type="password"] {
   width: 100%;
   padding: 0.875rem 1rem 0.875rem 2.75rem;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(56, 189, 248, 0.15);
+  background: var(--input-bg);
+  border: 1px solid var(--input-border);
   border-radius: 12px;
-  color: #e2e8f0;
+  color: var(--input-text);
   font-size: 0.95rem;
   transition: all 0.3s ease;
 }
 
 .form-group input::placeholder {
-  color: #475569;
+  color: var(--input-placeholder);
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #38bdf8;
-  background: rgba(15, 23, 42, 1);
-  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+  border-color: var(--input-focus);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
 }
 
 .toggle-password {
@@ -308,11 +307,11 @@
   font-size: 0.75rem;
 }
 
-/* Switch */
+/* Switch - Green when ON, Red when OFF */
 .switch {
   position: relative;
-  width: 48px;
-  height: 26px;
+  width: 52px;
+  height: 28px;
 }
 
 .switch input {
@@ -325,16 +324,16 @@
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background: #334155;
-  border-radius: 26px;
+  background: var(--error-color);
+  border-radius: 28px;
   transition: 0.3s;
 }
 
 .slider::before {
   content: '';
   position: absolute;
-  height: 20px;
-  width: 20px;
+  height: 22px;
+  width: 22px;
   left: 3px;
   bottom: 3px;
   background: white;
@@ -343,14 +342,14 @@
 }
 
 .switch input:checked + .slider {
-  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  background: var(--success-color);
 }
 
 .switch input:checked + .slider::before {
-  transform: translateX(22px);
+  transform: translateX(24px);
 }
 
-/* Auth Button */
+/* Auth Button - Green */
 .auth-btn {
   display: flex;
   align-items: center;
@@ -358,7 +357,7 @@
   gap: 0.5rem;
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #22d3ee 100%);
+  background: var(--btn-primary-bg);
   border: none;
   border-radius: 12px;
   color: white;
@@ -366,12 +365,13 @@
   font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 4px 20px rgba(34, 197, 94, 0.3);
 }
 
 .auth-btn:hover:not(:disabled) {
+  background: var(--btn-primary-hover);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(6, 182, 212, 0.5);
+  box-shadow: 0 8px 30px rgba(34, 197, 94, 0.4);
 }
 
 .auth-btn:disabled {

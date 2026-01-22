@@ -1,16 +1,99 @@
 // User Types
+export interface FreelancerProfile {
+  title: string;
+  hourlyRate?: number;
+  availability: 'available' | 'busy' | 'not_available';
+  completedJobs: number;
+  rating: number;
+  totalReviews: number;
+}
+
+export interface BankInfo {
+  bankName: string;
+  accountNumber: string;
+  accountHolderName: string;
+}
+
 export interface User {
   id: string;
   username: string;
   email: string;
   displayName: string;
   avatar?: string;
+  coverImage?: string;
   bio?: string;
+  location?: string;
+  website?: string;
   skills: string[];
   joinedAt: Date;
   isFreelancer: boolean;
+  freelancerProfile?: FreelancerProfile;
+  bankInfo?: BankInfo;
   hourlyRate?: number;
   portfolio?: string;
+  connections?: string[]; // User IDs
+  followers?: string[]; // User IDs
+  following?: string[]; // User IDs
+  projects?: string[]; // Project IDs
+  rating?: number;
+  reviewCount?: number;
+  savedPosts?: string[]; // Post IDs
+  isOnline?: boolean;
+  lastSeen?: Date;
+}
+
+// Project Types
+export interface Project {
+  id: string;
+  title: string;
+  description: string;
+  image?: string;
+  technologies: string[];
+  link?: string;
+  userId: string;
+  createdAt: Date;
+}
+
+// Job Types
+export interface Job {
+  id: string;
+  title: string;
+  company: string;
+  companyLogo?: string;
+  description: string;
+  location: string;
+  locationType: 'remote' | 'hybrid' | 'onsite';
+  salary?: {
+    min: number;
+    max: number;
+    currency: string;
+  };
+  skills: string[];
+  jobType: 'fulltime' | 'parttime' | 'contract' | 'freelance';
+  postedBy: User;
+  postedAt: Date;
+  deadline?: Date;
+  applicants?: string[]; // User IDs
+  isActive: boolean;
+}
+
+// Message Types
+export interface Message {
+  id: string;
+  senderId: string;
+  receiverId: string;
+  content: string;
+  createdAt: Date;
+  read: boolean;
+  attachments?: string[];
+}
+
+export interface Conversation {
+  id: string;
+  participants: User[];
+  lastMessage?: Message;
+  unreadCount: number;
+  updatedAt: Date;
 }
 
 // Post Types
