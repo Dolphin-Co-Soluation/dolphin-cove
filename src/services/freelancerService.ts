@@ -27,35 +27,37 @@ export const freelancerService = {
         profile?: FreelancerProfile;
         hasBankInfo: boolean;
       };
-    }>(`/freelancer/mode?userId=${userId}`);
+    }>(`/freelancer-mode/${userId}`);
   },
 
-  // Toggle freelancer mode
-  async updateFreelancerMode(userId: string, isFreelancer: boolean, profile?: Partial<FreelancerProfile>) {
-    return fetchAPI<{ success: boolean; data: any }>('/freelancer/mode', {
-      method: 'PUT',
-      body: JSON.stringify({ userId, isFreelancer, profile }),
+  // Enable freelancer mode
+  async enableFreelancerMode(userId: string, profile?: Partial<FreelancerProfile>) {
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-mode/${userId}/enable`, {
+      method: 'POST',
+      body: JSON.stringify(profile || {}),
     });
   },
 
-  // Get freelancer profile
-  async getFreelancerProfile(userId: string) {
-    return fetchAPI<{ success: boolean; data: any }>(`/freelancer/profile/${userId}`);
+  // Disable freelancer mode
+  async disableFreelancerMode(userId: string) {
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-mode/${userId}/disable`, {
+      method: 'POST',
+    });
   },
 
   // Update freelancer profile
   async updateFreelancerProfile(userId: string, profile: Partial<FreelancerProfile>) {
-    return fetchAPI<{ success: boolean; data: any }>('/freelancer/profile', {
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-mode/${userId}/profile`, {
       method: 'PUT',
-      body: JSON.stringify({ userId, ...profile }),
+      body: JSON.stringify(profile),
     });
   },
 
   // Update bank info
   async updateBankInfo(userId: string, bankInfo: BankInfo) {
-    return fetchAPI<{ success: boolean }>('/freelancer/bank-info', {
+    return fetchAPI<{ success: boolean }>(`/freelancer-mode/${userId}/profile`, {
       method: 'PUT',
-      body: JSON.stringify({ userId, bankInfo }),
+      body: JSON.stringify({ bankInfo }),
     });
   },
 
@@ -78,7 +80,7 @@ export const freelancerService = {
 
     const query = searchParams.toString();
     return fetchAPI<{ success: boolean; data: any[]; pagination: any }>(
-      `/freelancer/search${query ? `?${query}` : ''}`
+      `/freelancer-mode/freelancers/list${query ? `?${query}` : ''}`
     );
   },
 };

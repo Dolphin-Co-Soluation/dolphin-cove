@@ -1,9 +1,36 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Code, Briefcase, Users, Zap, Globe, Shield, Waves, ChevronRight } from 'lucide-react';
 import logo from '../../assets/Dolphin-cove.png';
 import './LandingPage.css';
 
 export function LandingPage() {
+  const [stats, setStats] = useState({ developers: 0, projects: 0 });
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/stats`);
+        if (response.ok) {
+          const data = await response.json();
+          setStats({
+            developers: data.data?.developers || 0,
+            projects: data.data?.projects || 0,
+          });
+        }
+      } catch (error) {
+        console.error('Failed to fetch stats:', error);
+        // Fallback to placeholder values
+        setStats({ developers: 0, projects: 0 });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
   return (
     <div className="landing-page">
       {/* Hero Section */}
@@ -57,18 +84,13 @@ export function LandingPage() {
 
           <div className="hero-stats">
             <div className="stat-item">
-              <strong>10K+</strong>
+              <strong>{isLoading ? '...' : stats.developers.toLocaleString()}</strong>
               <span>Developers</span>
             </div>
             <div className="stat-divider"></div>
             <div className="stat-item">
-              <strong>5K+</strong>
+              <strong>{isLoading ? '...' : stats.projects.toLocaleString()}</strong>
               <span>Projects</span>
-            </div>
-            <div className="stat-divider"></div>
-            <div className="stat-item">
-              <strong>$2M+</strong>
-              <span>Paid Out</span>
             </div>
           </div>
         </div>

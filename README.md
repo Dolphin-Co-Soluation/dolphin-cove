@@ -1,73 +1,130 @@
-# React + TypeScript + Vite
+# 🐬 Dolphin Cove - Freelancer Marketplace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, full-stack freelancer marketplace built with React, Express, and Supabase.
 
-Currently, two official plugins are available:
+## 🚀 Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Frontend
+- **React 18** with TypeScript
+- **Vite** for fast development
+- **React Router** for navigation
+- **CSS** for styling
 
-## React Compiler
+### Backend
+- **Express.js** with TypeScript
+- **Supabase** for PostgreSQL database
+- **Supabase Storage** for file uploads
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Deployment (100% FREE)
+- **Vercel** - Frontend hosting
+- **Render** - Backend hosting
+- **Supabase** - Database & Storage
 
-## Expanding the ESLint configuration
+## 📁 Project Structure
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+dolphin-cove/
+├── src/                    # Frontend React app
+│   ├── components/         # Reusable UI components
+│   ├── pages/             # Page components
+│   ├── services/          # API service functions
+│   ├── context/           # React contexts
+│   └── types/             # TypeScript types
+├── api/                   # Backend Express API
+│   ├── src/
+│   │   ├── routes/        # API route handlers
+│   │   ├── lib/           # Database & utilities
+│   │   └── types/         # TypeScript types
+│   └── supabase-schema.sql # Database schema
+└── mdfiles/               # Documentation
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🛠️ Local Development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- Supabase account (free)
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1. Clone & Install
+```bash
+git clone https://github.com/your-username/dolphin-cove.git
+cd dolphin-cove
+
+# Install frontend dependencies
+npm install
+
+# Install backend dependencies
+cd api && npm install
+cd ..
 ```
+
+### 2. Set Up Supabase
+1. Create a project at [supabase.com](https://supabase.com)
+2. Run `api/supabase-schema.sql` in the SQL Editor
+3. Create a storage bucket named `dolphin-cove-files`
+
+### 3. Configure Environment Variables
+
+**Backend (`api/.env`):**
+```env
+SUPABASE_URL=your_supabase_url
+SUPABASE_ANON_KEY=your_supabase_anon_key
+PORT=3001
+NODE_ENV=development
+FRONTEND_URL=http://localhost:5173
+```
+
+**Frontend (`.env`):**
+```env
+VITE_API_URL=http://localhost:3001/api
+```
+
+### 4. Start Development Servers
+
+**Terminal 1 - Backend:**
+```bash
+cd api && npm run dev
+```
+
+**Terminal 2 - Frontend:**
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## 📦 Deployment
+
+See [FREE_DEPLOYMENT_GUIDE.md](./mdfiles/FREE_DEPLOYMENT_GUIDE.md) for step-by-step instructions to deploy for free using Vercel + Render + Supabase.
+
+## 🌟 Features
+
+- **User Authentication** - Register, login, profile management
+- **Social Features** - Follow users, connections, posts
+- **Freelance Jobs** - Post jobs, apply, hire freelancers
+- **Task Management** - Create and track project tasks
+- **File Uploads** - Avatar, attachments via Supabase Storage
+- **Real-time Stats** - Live platform statistics
+
+## 🔑 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/health` | Health check |
+| GET | `/api/stats` | Platform statistics |
+| POST | `/api/users/register` | Register user |
+| POST | `/api/users/login` | Login user |
+| GET | `/api/posts` | Get posts feed |
+| POST | `/api/posts` | Create post |
+| GET | `/api/freelance-jobs` | Get job listings |
+| POST | `/api/freelance-jobs` | Create job |
+| GET | `/api/tasks` | Get tasks |
+
+## 📄 License
+
+MIT License
+
+## 🤝 Contributing
+
+Pull requests welcome! Please open an issue first for major changes.
