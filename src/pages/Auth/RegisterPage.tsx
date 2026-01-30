@@ -112,7 +112,7 @@ export function RegisterPage() {
                     type="text"
                     id="displayName"
                     name="displayName"
-                    placeholder="John Doe"
+                    placeholder="Enter your full name"
                     value={formData.displayName}
                     onChange={handleChange}
                   />
@@ -127,7 +127,7 @@ export function RegisterPage() {
                     type="text"
                     id="username"
                     name="username"
-                    placeholder="johndoe"
+                    placeholder="Choose a username"
                     value={formData.username}
                     onChange={handleChange}
                   />

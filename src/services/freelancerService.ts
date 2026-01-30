@@ -27,35 +27,35 @@ export const freelancerService = {
         profile?: FreelancerProfile;
         hasBankInfo: boolean;
       };
-    }>(`/freelancer/mode?userId=${userId}`);
+    }>(`/freelancer-mode/${userId}`);
   },
 
-  // Toggle freelancer mode
+  // Toggle freelancer mode (enable/disable)
   async updateFreelancerMode(userId: string, isFreelancer: boolean, profile?: Partial<FreelancerProfile>) {
-    return fetchAPI<{ success: boolean; data: any }>('/freelancer/mode', {
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-mode/${userId}`, {
       method: 'PUT',
-      body: JSON.stringify({ userId, isFreelancer, profile }),
+      body: JSON.stringify({ isFreelancer, profile }),
     });
   },
 
   // Get freelancer profile
   async getFreelancerProfile(userId: string) {
-    return fetchAPI<{ success: boolean; data: any }>(`/freelancer/profile/${userId}`);
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-profile/${userId}`);
   },
 
   // Update freelancer profile
   async updateFreelancerProfile(userId: string, profile: Partial<FreelancerProfile>) {
-    return fetchAPI<{ success: boolean; data: any }>('/freelancer/profile', {
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-profile/${userId}`, {
       method: 'PUT',
-      body: JSON.stringify({ userId, ...profile }),
+      body: JSON.stringify(profile),
     });
   },
 
   // Update bank info
   async updateBankInfo(userId: string, bankInfo: BankInfo) {
-    return fetchAPI<{ success: boolean }>('/freelancer/bank-info', {
+    return fetchAPI<{ success: boolean }>(`/freelancer-profile/${userId}/bank-info`, {
       method: 'PUT',
-      body: JSON.stringify({ userId, bankInfo }),
+      body: JSON.stringify({ bankInfo }),
     });
   },
 
@@ -78,7 +78,7 @@ export const freelancerService = {
 
     const query = searchParams.toString();
     return fetchAPI<{ success: boolean; data: any[]; pagination: any }>(
-      `/freelancer/search${query ? `?${query}` : ''}`
+      `/freelancers${query ? `?${query}` : ''}`
     );
   },
 };
