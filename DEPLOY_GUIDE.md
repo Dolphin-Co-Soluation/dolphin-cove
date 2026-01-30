@@ -17,7 +17,10 @@ Deploy your app for **100% FREE** using Vercel + Render + Supabase.
 ## Step 1: Set Up Supabase (Database)
 
 ### 1.1 Create Account
-1. Go to [supabase.com](https://supabase.com)
+1. Go to [supabase.com](https://supabase.com)  Password = VOjVG19eVtebs7BG
+
+ postgresql://postgres:[YOUR-PASSWORD]@db.qpunrsawovtxaaugfspi.supabase.co:5432/postgres
+
 2. Click **"Start your project"**
 3. Sign up with GitHub (recommended)
 
@@ -33,8 +36,8 @@ Deploy your app for **100% FREE** using Vercel + Render + Supabase.
 ### 1.3 Get Your Keys
 1. Go to **Settings** → **API**
 2. Copy these values (you'll need them later):
-   - **Project URL:** `https://xxxxx.supabase.co`
-   - **anon public key:** `eyJhbGci...` (long string)
+   - **Project URL:** `https://xxxxx.supabase.co`  (https://qpunrsawovtxaaugfspi.supabase.co)
+   - **anon public key:** `eyJhbGci...` (long string) (eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFwdW5yc2F3b3Z0eGFhdWdmc3BpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3ODIwNzYsImV4cCI6MjA4NTM1ODA3Nn0.zEEJ6pU1wVKhXFixibeQ_QnKX-ccGgVNCg-E4viwy9k)
 
 ### 1.4 Create Database Tables
 1. Go to **SQL Editor** (left sidebar)
