@@ -127,7 +127,9 @@ export const freelanceService = {
 
   // Get applicants for a job (job owner only)
   async getApplicants(jobId: string, clientId: string) {
-    return fetchAPI<{ success: boolean; data: any[] }>(`/freelance-jobs/${jobId}/applicants?clientId=${clientId}`);
+    return fetchAPI<{ success: boolean; data: any[] }>(
+      `/freelance-jobs/${jobId}/applications?clientId=${clientId}`
+    );
   },
 
   // Hire a freelancer
@@ -148,14 +150,19 @@ export const freelanceService = {
 
   // Get my job postings (as client)
   async getMyJobPosts(userId: string, status?: string) {
-    const params = new URLSearchParams({ clientId: userId });
+    const params = new URLSearchParams();
     if (status) params.set('status', status);
-    return fetchAPI<{ success: boolean; data: FreelanceJob[] }>(`/my-job-posts?${params}`);
+    const query = params.toString();
+    return fetchAPI<{ success: boolean; data: FreelanceJob[] }>(
+      `/freelance-jobs/my-jobs/${userId}${query ? `?${query}` : ''}`
+    );
   },
 
   // Get my applications (as freelancer)
   async getMyApplications(userId: string) {
-    return fetchAPI<{ success: boolean; data: FreelanceJob[] }>(`/my-applications?freelancerId=${userId}`);
+    return fetchAPI<{ success: boolean; data: FreelanceJob[] }>(
+      `/freelance-jobs/my-applications/${userId}`
+    );
   },
 
   // Get jobs I'm hired for

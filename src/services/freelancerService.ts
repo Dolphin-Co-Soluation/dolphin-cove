@@ -30,22 +30,24 @@ export const freelancerService = {
     }>(`/freelancer-mode/${userId}`);
   },
 
-  // Toggle freelancer mode (enable/disable)
-  async updateFreelancerMode(userId: string, isFreelancer: boolean, profile?: Partial<FreelancerProfile>) {
-    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-mode/${userId}`, {
-      method: 'PUT',
-      body: JSON.stringify({ isFreelancer, profile }),
+  // Enable freelancer mode
+  async enableFreelancerMode(userId: string, profile?: Partial<FreelancerProfile>) {
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-mode/${userId}/enable`, {
+      method: 'POST',
+      body: JSON.stringify(profile || {}),
     });
   },
 
-  // Get freelancer profile
-  async getFreelancerProfile(userId: string) {
-    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-profile/${userId}`);
+  // Disable freelancer mode
+  async disableFreelancerMode(userId: string) {
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-mode/${userId}/disable`, {
+      method: 'POST',
+    });
   },
 
   // Update freelancer profile
   async updateFreelancerProfile(userId: string, profile: Partial<FreelancerProfile>) {
-    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-profile/${userId}`, {
+    return fetchAPI<{ success: boolean; data: any }>(`/freelancer-mode/${userId}/profile`, {
       method: 'PUT',
       body: JSON.stringify(profile),
     });
@@ -53,7 +55,7 @@ export const freelancerService = {
 
   // Update bank info
   async updateBankInfo(userId: string, bankInfo: BankInfo) {
-    return fetchAPI<{ success: boolean }>(`/freelancer-profile/${userId}/bank-info`, {
+    return fetchAPI<{ success: boolean }>(`/freelancer-mode/${userId}/profile`, {
       method: 'PUT',
       body: JSON.stringify({ bankInfo }),
     });
@@ -78,7 +80,7 @@ export const freelancerService = {
 
     const query = searchParams.toString();
     return fetchAPI<{ success: boolean; data: any[]; pagination: any }>(
-      `/freelancers${query ? `?${query}` : ''}`
+      `/freelancer-mode/freelancers/list${query ? `?${query}` : ''}`
     );
   },
 };

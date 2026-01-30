@@ -1,5 +1,7 @@
 // Base API configuration
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:7071/api';
+// For development: http://localhost:3001/api
+// For production: Set VITE_API_URL in Vercel environment variables
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001/api';
 
 // Generic fetch wrapper with error handling
 async function fetchAPI<T>(

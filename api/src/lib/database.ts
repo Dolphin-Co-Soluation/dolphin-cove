@@ -1,45 +1,42 @@
-import { CosmosClient, Database, Container } from '@azure/cosmos';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
 
-const connectionString = process.env.COSMOS_CONNECTION_STRING;
-const databaseName = process.env.COSMOS_DATABASE || 'DolphinCoveDB';
+dotenv.config();
 
-if (!connectionString) {
-  throw new Error('COSMOS_CONNECTION_STRING environment variable is required');
+// Supabase Configuration
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseKey = process.env.SUPABASE_ANON_KEY || '';
+
+if (!supabaseUrl || !supabaseKey) {
+  console.error('⚠️ Missing Supabase configuration. Set SUPABASE_URL and SUPABASE_ANON_KEY');
 }
 
-const client = new CosmosClient(connectionString);
-const database: Database = client.database(databaseName);
+// Create Supabase client
+export const supabase: SupabaseClient = createClient(supabaseUrl, supabaseKey);
 
-// Export container references
-export const containers = {
-  users: database.container('Users'),
-  posts: database.container('Posts'),
-  messages: database.container('Messages'),
-  freelanceJobs: database.container('FreelanceJobs'),
-  tasks: database.container('Tasks'),
+// Database table names (PostgreSQL tables in Supabase)
+export const tables = {
+  users: 'users',
+  posts: 'posts',
+  messages: 'messages',
+  freelanceJobs: 'freelance_jobs',
+  tasks: 'tasks',
 };
 
-export { database, client };
-
-// Initialize containers (call during startup if needed)
-export async function initializeContainers(): Promise<void> {
-  const containerConfigs = [
-    { id: 'Users', partitionKey: '/id' },
-    { id: 'Posts', partitionKey: '/authorId' },
-    { id: 'Messages', partitionKey: '/conversationId' },
-    { id: 'FreelanceJobs', partitionKey: '/clientId' },
-    { id: 'Tasks', partitionKey: '/participantId' },
-  ];
-
-  for (const config of containerConfigs) {
-    try {
-      await database.containers.createIfNotExists({
-        id: config.id,
-        partitionKey: { paths: [config.partitionKey] },
-      });
-      console.log(`Container ${config.id} is ready`);
-    } catch (error) {
-      console.error(`Error creating container ${config.id}:`, error);
+// Helper function to check database connection
+export async function checkDatabaseConnection(): Promise<boolean> {
+  try {
+    const { data, error } = await supabase.from('users').select('count').limit(1);
+    if (error) {
+      console.error('Database connection failed:', error.message);
+      return false;
     }
+    console.log('✅ Supabase connection successful');
+    return true;
+  } catch (error) {
+    console.error('Database connection error:', error);
+    return false;
   }
 }
+
+export default supabase;
